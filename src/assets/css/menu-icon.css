@@ -1,0 +1,38 @@
+/* first level menu */
+.menu-archive {
+	background: url("../img/menu-icon/archive.png") no-repeat left center / 100% 100%;
+}
+
+.menu-bar-graph {
+	margin-right: 15px!important;
+	background: url("../img/menu-icon/bar-graph.png") no-repeat left center / 100% 100%;
+}
+
+.menu-calendar {
+	margin-right: 15px!important;
+	background: url("../img/menu-icon/calendar.png") no-repeat left center / 100% 100%;
+}
+
+.menu-check {
+	margin-right: 15px!important;
+	background: url("../img/menu-icon/check.png") no-repeat left center / 100% 100%;
+}
+
+.menu-cog {
+	margin-right: 15px!important;
+	background: url("../img/menu-icon/cog.png") no-repeat left center / 100% 100%;
+}
+
+.menu-monitor {
+	margin-right: 15px!important;
+	background: url("../img/menu-icon/monitor.png") no-repeat left center / 100% 100%;
+}
+
+.menu-suitcase {
+	background: url("../img/menu-icon/suitcase.png") no-repeat left center / 100% 100%;
+}
+
+.menu-upload {
+	margin-right: 15px!important;
+	background: url("../img/menu-icon/upload.png") no-repeat left center / 100% 100%;
+}

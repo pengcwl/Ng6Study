@@ -1,0 +1,4 @@
+{
+  "valid_status": [{"label":"有效", "value":"1"}, {"label":"无效", "value":"0"}],
+  "settle_status": [{"label":"已结算", "value":"1"}, {"label":"未结算", "value":"0"}]
+}

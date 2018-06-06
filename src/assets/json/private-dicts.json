@@ -1,0 +1,5 @@
+{
+  "gender": [{"desc":"男", "value":"1"}, {"desc":"女", "value":"0"}],
+  "bool": [{"desc":"是", "value":"1"}, {"desc":"否", "value":"0"}],
+  "device_type": [{"desc":"Win7", "value":"1"}, {"desc":"Android", "value":"2"}, {"desc":"IOS", "value":"3"}]
+}

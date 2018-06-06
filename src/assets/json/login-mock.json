@@ -1,0 +1,5 @@
+{
+  "accountId": "1",
+  "accountName": "admin",
+  "token": "fake-jwt-token"
+}
