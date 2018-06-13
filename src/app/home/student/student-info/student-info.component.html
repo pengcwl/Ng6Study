@@ -1,0 +1,164 @@
+<!--工具栏-->
+<div class="ui-widget-header">
+    <input type="text" pInputText size="25" placeholder="请输入姓名查询" [(ngModel)]="dt.args.searchText" (keyup)="dt.searchChanged()"/>
+    <button type="button" class="ui-button-success" pButton icon="fa-refresh" label="刷新" (click)="reload(pdt)"></button>
+    <button type="button" class="ui-button-info" pButton icon="fa-search" label="精确查询" (click)="showQueryMoModal(queryModal,queryForm)"></button>
+    <button type="button" pButton icon="fa-plus" label="新增" (click)="showAddModal(cuModal,cuForm)"></button>
+    <button type="button" pButton label="上传文件弹窗" (click)="showUploadModal(uploadModal,uploadForm)"></button>
+    <button type="button" class="ui-button-secondary" pButton label="打开消息框" (click)="growl.show({type:'error',title:'出错了',message:'测试'})"></button>
+</div>
+
+<!--数据表格-->
+<p-dataTable #pdt [value]="dt.args.pm.pageData" [rows]="dt.args.pm.rows" [rowsPerPageOptions]="dt.args.pm.pageList"
+    (onPage)="dt.onPage($event)" [paginator]="true" [responsive]="true">
+    <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header" [styleClass]="col.styleClass">
+        <ng-template *ngIf="col.field=='operator'" let-user="rowData" pTemplate="body">
+            <button type="button" class="btn btn-warning btn-sm" (click)="showUpdateModal(cuModal,user)">编辑</button>
+            <button type="button" class="btn btn-danger btn-sm" (click)="showDelConfirm(user)">删除</button>
+        </ng-template>
+    </p-column>
+</p-dataTable>
+
+<!--精确查询弹窗-->
+<div class="modal fade" bsModal #queryModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="myQueryModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="width:400px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">查询</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="queryModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #queryForm="ngForm" class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-3">姓名:</div>
+            <div class="ui-grid-col-9">
+              <input pInputText type="text" name="user.name" [(ngModel)]="user.name"/>
+            </div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-3">性别:</div>
+            <div class="ui-grid-col-9">
+              <p-dropdown [options]="prvDicts|dict:'gender'" name="user.gender" [(ngModel)]="user.gender"
+                          [filter]="true" [style]="{'width':'100%'}" placeholder="请选择性别"></p-dropdown>
+            </div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-3">手机号:</div>
+            <div class="ui-grid-col-9">
+              <input pInputText type="text" name="user.mobileNum" [(ngModel)]="user.mobileNum"/>
+            </div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-3">邮箱:</div>
+            <div class="ui-grid-col-9">
+              <input pInputText type="text" name="user.email" [(ngModel)]="user.email"/>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" pButton icon="fa-close" (click)="queryModal.hide()" label="取消"></button>
+        <button type="button" pButton icon="fa-check" (click)="dt.query(queryForm.value);queryModal.hide()" label="查询"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--新增、更新数据弹窗-->
+<div class="modal fade" bsModal #cuModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="myCuModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="width:400px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{cuDlgTitle}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="cuModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #cuForm="ngForm" class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-3 pull-right"><sup>*</sup>姓名:</div>
+            <div class="ui-grid-col-8">
+              <input pInputText type="text" name="user.name" [(ngModel)]="user.name" required/>
+            </div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-3 pull-right">性别:</div>
+            <div class="ui-grid-col-8">
+              <p-dropdown [options]="prvDicts|dict:'gender'" name="user.gender" [(ngModel)]="user.gender"
+                          [filter]="true" [style]="{'width':'100%'}" placeholder="请选择性别"></p-dropdown>
+            </div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-3 pull-right">生日:</div>
+            <div class="ui-grid-col-8">
+              <p-calendar name="user.birthday" [(ngModel)]="user.birthday" [locale]="zh" [showIcon]="true" [readonlyInput]="true"
+                          [monthNavigator]="true" [yearNavigator]="true" yearRange="1900:2020" dateFormat="yy-mm-dd"></p-calendar>
+            </div>
+          </div>
+           <div class="ui-grid-row">
+            <div class="ui-grid-col-3 pull-right">手机号:</div>
+            <div class="ui-grid-col-8">
+              <input pInputText type="text" name="user.mobileNum" [(ngModel)]="user.mobileNum"/>
+            </div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-3 pull-right">邮箱:</div>
+            <div class="ui-grid-col-8">
+              <input pInputText type="text" name="user.email" [(ngModel)]="user.email"/>
+            </div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-3 pull-right">身份证:</div>
+            <div class="ui-grid-col-8">
+              <input pInputText type="text" name="user.idCard" [(ngModel)]="user.idCard"/>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" pButton (click)="cuModal.hide()" label="取消"></button>
+        <button [disabled]="cuForm.invalid" *ngIf="addOrUpdate" type="button" pButton (click)="save(dt, cuForm.value);cuModal.hide()" label="保存"></button>
+        <button [disabled]="cuForm.invalid" *ngIf="!addOrUpdate" type="button" pButton (click)="update(dt, user);cuModal.hide()" label="保存"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--上传文件弹窗-->
+<div class="modal fade" bsModal #uploadModal="bs-modal" [config]="{backdrop: 'static'}"
+    tabindex="-1" role="dialog" aria-labelledby="myUploadModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="width:400px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">文件上传</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="uploadModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #uploadForm="ngForm" class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" method="post" enctype="multipart/form-data" style="margin: 10px 0px">
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-3 pull-right">头像:</div>
+            <div class="ui-grid-col-8">
+              <!--<input #fileInput accept="image/*" type="file" (change)="onFileChange($event)" [(ngModel)]="user.file" #images="ngModel" required/>-->
+              <input #fileInput accept="image/*" type="file" name="file" (change)="onFileChange($event)" [(ngModel)]="user.file" #images="ngModel" required/>
+              <!--<label class="custom-file">
+  <input type="file" id="file" class="custom-file-input">
+  <span class="custom-file-control"></span>
+</label>-->
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button [disabled]="uploadForm.invalid" type="button" pButton (click)="upload(dt,user);uploadModal.hide()" label="确认上传"></button>
+        <button type="button" pButton (click)="uploadModal.hide()" label="取消"></button>
+      </div>
+    </div>
+  </div>
+</div>

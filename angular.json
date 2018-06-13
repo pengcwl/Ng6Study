@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "study-ng": {
+    "rm-ng6": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/study-ng",
+            "outputPath": "dist/rm-ng6",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -23,7 +23,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/assets/css/font-awesome.min.css",
+              "src/assets/css/menu-icon.css",
+              "src/scss/style.scss"
             ],
             "scripts": []
           },
@@ -50,18 +52,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "study-ng:build"
+            "browserTarget": "rm-ng6:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "study-ng:build:production"
+              "browserTarget": "rm-ng6:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "study-ng:build"
+            "browserTarget": "rm-ng6:build"
           }
         },
         "test": {
@@ -95,7 +97,7 @@
         }
       }
     },
-    "study-ng-e2e": {
+    "rm-ng6-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -103,7 +105,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "study-ng:serve"
+            "devServerTarget": "rm-ng6:serve"
           }
         },
         "lint": {
@@ -118,5 +120,5 @@
       }
     }
   },
-  "defaultProject": "study-ng"
+  "defaultProject": "rm-ng6"
 }

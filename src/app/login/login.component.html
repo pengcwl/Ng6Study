@@ -1,0 +1,40 @@
+<div class="login-main">
+  <!--header-->
+  <header>
+    <img class="pull-left" src="assets/img/login/logo.png"/>
+    <div class="pull-right"><span class="fa fa-cog"></span> <span>帮助中心</span></div>
+  </header><!--/.header-->
+
+  <!--content-->
+  <div class="content">
+    <div class="card pull-right">
+      <div class="card-block">
+        <form #loginForm="ngForm" (ngSubmit)="loginForm.form.valid && doLogin()" novalidate role="form">
+          <div class="form-group">
+            <p class="form-control-static login-title">标题</p>
+          </div>
+          <div class="form-group" [ngClass]="{'has-error': loginForm.submitted && !loginName.valid}">
+            <input name="loginName" [(ngModel)]="account.loginName" #loginName="ngModel" type="text" class="form-control user" placeholder="用户名" autocomplete="off" required/>
+            <span *ngIf="loginForm.submitted && !loginName.valid" class="text-danger">用户名不能为空！</span>
+          </div>
+          <div class="form-group" [ngClass]="{'has-error': loginForm.submitted && !password.valid}">
+            <input name="password" [(ngModel)]="account.password" #password="ngModel" type="password" class="form-control password" placeholder="密码" autocomplete="off" required minlength="6" maxlength="20"/>
+            <span *ngIf="loginForm.submitted && !password.valid" class="text-danger">密码不能为空，且长度必须为6~20位!</span>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input id="remember" type="checkbox"> 记住我
+            </label>
+          </div>
+          <button id="login" type="submit" class="btn btn-primary btn-block">登录</button>
+        </form>
+      </div>
+    </div>
+  </div><!--/.content-->
+
+  <!--footer-->
+  <footer>
+    <p>IE10以下浏览器不支持Angular，推荐使用IE10及以上版本浏览器</p>
+    <p>版本号：北京瑞华康源科技有限公司系统1.2.0 &#169;北京瑞华康源科技有限公司 保留所有权利</p>
+  </footer><!--/.footer-->
+</div>
