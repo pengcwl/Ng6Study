@@ -11,5 +11,11 @@ export const ASYNC_URLS = {
     'user.update': PATH + 'rmApi/user/user/save',
     'user.cou': PATH + 'rmApi/user/user/saveOrUpdate',
     'user.findById': PATH + 'rmApi/user/user/findById',
-    'user.delete': PATH + 'rmApi/user/user/delete'
+    'user.delete': PATH + 'rmApi/user/user/delete',
+    'student.list': PATH + 'rmApi/student/student/list',
+    'student.save': PATH + 'rmApi/student/student/save',
+    'student.update': PATH + 'rmApi/student/student/save',
+    'student.cou': PATH + 'rmApi/student/student/saveOrUpdate',
+    'student.findById': PATH + 'rmApi/student/student/findById',
+    'student.delete': PATH + 'rmApi/student/student/delete'
 };

@@ -7,12 +7,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { CrudModule } from './shared';
-import { StudentComponent } from './home/student/student.component';
+/**import { StudentComponent } from './home/student/student.component';**/
 
 @NgModule({
   declarations: [
-    AppComponent,
-    StudentComponent
+    AppComponent  /**,
+    StudentComponent*/
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 <!--工具栏-->
 <div class="ui-widget-header">
-    <input type="text" pInputText size="25" placeholder="请输入姓名查询" [(ngModel)]="dt.args.searchText" (keyup)="dt.searchChanged()"/>
+    <input type="text" pInputText size="25" placeholder="请输入学生姓名查询" [(ngModel)]="dt.args.searchText" (keyup)="dt.searchChanged()"/>
     <button type="button" class="ui-button-success" pButton icon="fa-refresh" label="刷新" (click)="reload(pdt)"></button>
     <button type="button" class="ui-button-info" pButton icon="fa-search" label="精确查询" (click)="showQueryMoModal(queryModal,queryForm)"></button>
     <button type="button" pButton icon="fa-plus" label="新增" (click)="showAddModal(cuModal,cuForm)"></button>
@@ -12,9 +12,9 @@
 <p-dataTable #pdt [value]="dt.args.pm.pageData" [rows]="dt.args.pm.rows" [rowsPerPageOptions]="dt.args.pm.pageList"
     (onPage)="dt.onPage($event)" [paginator]="true" [responsive]="true">
     <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header" [styleClass]="col.styleClass">
-        <ng-template *ngIf="col.field=='operator'" let-user="rowData" pTemplate="body">
-            <button type="button" class="btn btn-warning btn-sm" (click)="showUpdateModal(cuModal,user)">编辑</button>
-            <button type="button" class="btn btn-danger btn-sm" (click)="showDelConfirm(user)">删除</button>
+        <ng-template *ngIf="col.field=='operator'" let-student="rowData" pTemplate="body">
+            <button type="button" class="btn btn-warning btn-sm" (click)="showUpdateModal(cuModal,student)">编辑</button>
+            <button type="button" class="btn btn-danger btn-sm" (click)="showDelConfirm(student)">删除</button>
         </ng-template>
     </p-column>
 </p-dataTable>
@@ -25,7 +25,7 @@
   <div class="modal-dialog" style="width:400px">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title pull-left">查询</h4>
+        <h4 class="modal-title pull-left">学生信息查询</h4>
         <button type="button" class="close pull-right" aria-label="Close" (click)="queryModal.hide()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -35,26 +35,26 @@
           <div class="ui-grid-row">
             <div class="ui-grid-col-3">姓名:</div>
             <div class="ui-grid-col-9">
-              <input pInputText type="text" name="user.name" [(ngModel)]="user.name"/>
+              <input pInputText type="text" name="student.name" [(ngModel)]="student.name"/>
             </div>
           </div>
           <div class="ui-grid-row">
             <div class="ui-grid-col-3">性别:</div>
             <div class="ui-grid-col-9">
-              <p-dropdown [options]="prvDicts|dict:'gender'" name="user.gender" [(ngModel)]="user.gender"
+              <p-dropdown [options]="prvDicts|dict:'gender'" name="student.gender" [(ngModel)]="student.gender"
                           [filter]="true" [style]="{'width':'100%'}" placeholder="请选择性别"></p-dropdown>
             </div>
           </div>
           <div class="ui-grid-row">
             <div class="ui-grid-col-3">手机号:</div>
             <div class="ui-grid-col-9">
-              <input pInputText type="text" name="user.mobileNum" [(ngModel)]="user.mobileNum"/>
+              <input pInputText type="text" name="student.mobileNum" [(ngModel)]="student.mobileNum"/>
             </div>
           </div>
           <div class="ui-grid-row">
             <div class="ui-grid-col-3">邮箱:</div>
             <div class="ui-grid-col-9">
-              <input pInputText type="text" name="user.email" [(ngModel)]="user.email"/>
+              <input pInputText type="text" name="student.email" [(ngModel)]="student.email"/>
             </div>
           </div>
         </form>
@@ -83,39 +83,39 @@
           <div class="ui-grid-row">
             <div class="ui-grid-col-3 pull-right"><sup>*</sup>姓名:</div>
             <div class="ui-grid-col-8">
-              <input pInputText type="text" name="user.name" [(ngModel)]="user.name" required/>
+              <input pInputText type="text" name="student.name" [(ngModel)]="student.name" required/>
             </div>
           </div>
           <div class="ui-grid-row">
             <div class="ui-grid-col-3 pull-right">性别:</div>
             <div class="ui-grid-col-8">
-              <p-dropdown [options]="prvDicts|dict:'gender'" name="user.gender" [(ngModel)]="user.gender"
+              <p-dropdown [options]="genderOptions" name="student.gender" [(ngModel)]="student.gender"
                           [filter]="true" [style]="{'width':'100%'}" placeholder="请选择性别"></p-dropdown>
             </div>
           </div>
           <div class="ui-grid-row">
             <div class="ui-grid-col-3 pull-right">生日:</div>
             <div class="ui-grid-col-8">
-              <p-calendar name="user.birthday" [(ngModel)]="user.birthday" [locale]="zh" [showIcon]="true" [readonlyInput]="true"
+              <p-calendar name="student.birthday" [(ngModel)]="student.birthday" [locale]="zh" [showIcon]="true" [readonlyInput]="true"
                           [monthNavigator]="true" [yearNavigator]="true" yearRange="1900:2020" dateFormat="yy-mm-dd"></p-calendar>
             </div>
           </div>
            <div class="ui-grid-row">
             <div class="ui-grid-col-3 pull-right">手机号:</div>
             <div class="ui-grid-col-8">
-              <input pInputText type="text" name="user.mobileNum" [(ngModel)]="user.mobileNum"/>
+              <input pInputText type="text" name="student.mobileNum" [(ngModel)]="student.mobileNum"/>
             </div>
           </div>
           <div class="ui-grid-row">
             <div class="ui-grid-col-3 pull-right">邮箱:</div>
             <div class="ui-grid-col-8">
-              <input pInputText type="text" name="user.email" [(ngModel)]="user.email"/>
+              <input pInputText type="text" name="student.email" [(ngModel)]="student.email"/>
             </div>
           </div>
           <div class="ui-grid-row">
             <div class="ui-grid-col-3 pull-right">身份证:</div>
             <div class="ui-grid-col-8">
-              <input pInputText type="text" name="user.idCard" [(ngModel)]="user.idCard"/>
+              <input pInputText type="text" name="student.idCard" [(ngModel)]="student.idCard"/>
             </div>
           </div>
         </form>
@@ -123,7 +123,7 @@
       <div class="modal-footer">
         <button type="button" pButton (click)="cuModal.hide()" label="取消"></button>
         <button [disabled]="cuForm.invalid" *ngIf="addOrUpdate" type="button" pButton (click)="save(dt, cuForm.value);cuModal.hide()" label="保存"></button>
-        <button [disabled]="cuForm.invalid" *ngIf="!addOrUpdate" type="button" pButton (click)="update(dt, user);cuModal.hide()" label="保存"></button>
+        <button [disabled]="cuForm.invalid" *ngIf="!addOrUpdate" type="button" pButton (click)="update(dt, student);cuModal.hide()" label="保存"></button>
       </div>
     </div>
   </div>
@@ -135,7 +135,7 @@
   <div class="modal-dialog" style="width:400px">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title pull-left">文件上传</h4>
+        <h4 class="modal-title pull-left">学生照片上传</h4>
         <button type="button" class="close pull-right" aria-label="Close" (click)="uploadModal.hide()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -145,8 +145,8 @@
           <div class="ui-grid-row">
             <div class="ui-grid-col-3 pull-right">头像:</div>
             <div class="ui-grid-col-8">
-              <!--<input #fileInput accept="image/*" type="file" (change)="onFileChange($event)" [(ngModel)]="user.file" #images="ngModel" required/>-->
-              <input #fileInput accept="image/*" type="file" name="file" (change)="onFileChange($event)" [(ngModel)]="user.file" #images="ngModel" required/>
+              <!--<input #fileInput accept="image/*" type="file" (change)="onFileChange($event)" [(ngModel)]="student.file" #images="ngModel" required/>-->
+              <input #fileInput accept="image/*" type="file" name="file" (change)="onFileChange($event)" [(ngModel)]="student.file" #images="ngModel" required/>
               <!--<label class="custom-file">
   <input type="file" id="file" class="custom-file-input">
   <span class="custom-file-control"></span>
@@ -156,7 +156,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button [disabled]="uploadForm.invalid" type="button" pButton (click)="upload(dt,user);uploadModal.hide()" label="确认上传"></button>
+        <button [disabled]="uploadForm.invalid" type="button" pButton (click)="upload(dt,student);uploadModal.hide()" label="确认上传"></button>
         <button type="button" pButton (click)="uploadModal.hide()" label="取消"></button>
       </div>
     </div>

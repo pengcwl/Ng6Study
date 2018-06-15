@@ -7,10 +7,10 @@ const routes: Routes = [
     {
         path: '',
         component: StudentComponent,
-        data: {title: '用户管理'},
+        data: {title: '学生信息管理'},
         children: [
-          {path: '', redirectTo: 'userInfo', pathMatch: 'full'},
-          {path: 'userInfo', component: StudentComponent, data: {title: '学生信息管理'}}
+          {path: '', redirectTo: 'studentInfo', pathMatch: 'full'},
+          {path: 'studentInfo', component: StudentInfoComponent, data: {title: '学生信息管理'}}
         ]
       }
 ];

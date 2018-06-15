@@ -8,7 +8,7 @@ const routes: Routes = [
         component: HomeComponent,
         data: {title: '主页'},
         children: [
-          {path: '', redirectTo: 'user', pathMatch: 'full'},
+          {path: '', redirectTo: 'student', pathMatch: 'full'},
           {path: 'user', loadChildren: 'src/app/home/user/user.module#UserModule'},
           {path: 'student', loadChildren: 'src/app/home/student/student.module#StudentModule'}
         ]

@@ -29,7 +29,7 @@ export const PAGES_MENU = [
         },
         children: [
           {
-            path: 'studentinfo',
+            path: 'studentInfo',
             menu: {
               title: '学生信息',
               icon: null,

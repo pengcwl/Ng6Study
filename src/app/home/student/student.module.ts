@@ -4,7 +4,7 @@ import {CrudModule} from '../../shared';
 
 import {StudentComponent} from './student.component';
 import {StudentInfoComponent} from './student-info';
-import {StudentRoutingModule } from './student-routing.module';
+import {StudentRoutingModule} from './student-routing.module';
 
 @NgModule({
   declarations: [
@@ -16,4 +16,4 @@ import {StudentRoutingModule } from './student-routing.module';
     StudentRoutingModule
   ]
 })
-export class UserModule {}
+export class StudentModule {}
